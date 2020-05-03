@@ -1,6 +1,6 @@
 {
   "name": "react-native-hook-image-slider",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "React Native Image Slider UI component built with react hooks",
   "main": "index.js",
   "scripts": {
@@ -29,16 +29,16 @@
   "license": "MIT",
   "repository": "https://github.com/morawskiOZ/react-native-hook-image-slider.git",
   "homepage": "https://github.com/morawskiOZ/react-native-hook-image-slider",
-  "dependencies": {
-    "react-native": "*",
-    "react": "*"
-  },
   "devDependencies": {
+    "react-native": "*",
+    "react": "*",
     "@types/react": "*",
     "@types/react-native": "^0.62.5",
     "typescript": "^3.8.3"
   },
   "peerDependencies": {
+    "react-native": "*",
+    "react": "*",
     "react-dom": "*"
   }
 }
