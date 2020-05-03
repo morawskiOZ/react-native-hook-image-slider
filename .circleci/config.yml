@@ -31,7 +31,6 @@ jobs:
         paths: .
   deploy:
     executor: node-executor
-    working_directory: ~/repo
     steps:
       - attach_workspace:
           at: ~/repo
