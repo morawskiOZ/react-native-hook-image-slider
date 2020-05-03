@@ -23,7 +23,7 @@ commands:
 jobs:
   test:
     steps:
-      - npm_test
+      - npm-test
       - persist_to_workspace:
         root: ~/repo
         paths: .
