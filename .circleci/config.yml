@@ -21,6 +21,9 @@ commands:
           key: npm-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
+      - persist_to_workspace:
+        root: ~/repo
+        paths: .
 jobs:
   test:
     executor: node-executor
