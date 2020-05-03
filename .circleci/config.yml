@@ -50,13 +50,13 @@ workflows:
   version: 2
   build-test-and-deploy:
     jobs:
-      -install_dependency
+      - install_dependency
       - build:
-        requires:
-          - install_dependency
+          requires:
+            - install_dependency
       - npm_test:
-        requires:
-          - install_dependency
+          requires:
+            - install_dependency
           filters:
             tags:
               only: /^v.*/
