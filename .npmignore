@@ -2,6 +2,8 @@ src/**/*.ts
 src/**/*.tsx
 !src/**/*.d.ts
 
+.circleci
+
 index.ts
 tsconfig.json
 node_modules
