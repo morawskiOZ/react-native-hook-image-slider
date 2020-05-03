@@ -26,9 +26,6 @@ import Slider from 'react-native-hook-image-slider';
 
 const Component = () => {
   const { register, handleSubmit, errors } = useForm(); // initialise the hook
-  const onSubmit = data => {
-    console.log(data);
-  };
 
   return (
       <Slider slides={['./images/you_are_awesome.jpeg', 'https://yourCDNLink.com', 'home/project/profits/spreadsheet.jpeg']} />
