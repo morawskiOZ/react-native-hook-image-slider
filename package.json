@@ -31,7 +31,11 @@
   "homepage": "https://github.com/morawskiOZ/react-native-hook-image-slider",
   "devDependencies": {
     "rimraf": "*",
-    "typescript": "^3.8.3"
+    "typescript": "^3.8.3",
+    "react-native": "*",
+    "react": "*",
+    "@types/react": "*",
+    "@types/react-native": "*"
   },
   "peerDependencies": {
     "react-native": "*",
