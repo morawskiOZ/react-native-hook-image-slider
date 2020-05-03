@@ -4,6 +4,16 @@ executors:
     working_directory: ~/repo
     docker:
       - image: circleci/node:10
+commands:
+  save_files:
+    steps:
+      - persist_to_workspace:
+          root: ~/repo
+          paths: .
+  read_files:
+      steps:
+        - attach_workspace:	
+            at: ~/repo
 jobs:
   install_dependency:
     executor: node-executor
@@ -19,27 +29,26 @@ jobs:
           key: npm-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
-      - persist_to_workspace:
-          root: ~/repo
-          paths: .
+      - save_files
   build:
     executor: node-executor
     steps:
+      - read_files
       - run:
           name: build
           command: npm run build
-      - persist_to_workspace:
-          root: ~/repo
-          paths: .
+      - save_files
   npm_test:
     executor: node-executor
     steps:
+      - read_files
       - run:
           name: Run tests
           command: npm test
   deploy:
     executor: node-executor
     steps:
+      - read_files
       - run:
           name: Authenticate with registry
           command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ~/repo/.npmrc
