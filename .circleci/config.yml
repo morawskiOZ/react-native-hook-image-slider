@@ -29,6 +29,8 @@ jobs:
   deploy:
     executor: node-executor
     steps:
+      - attach_workspace:
+          at: ~/repo
       - run:
           name: Authenticate with registry
           command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ~/repo/.npmrc
