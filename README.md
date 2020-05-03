@@ -21,12 +21,10 @@ or
 ## Quickstart
 
 ```javascript
-import React from 'react';
+import * as React from 'react';
 import Slider from 'react-native-hook-image-slider';
 
 const Component = () => {
-  const { register, handleSubmit, errors } = useForm(); // initialise the hook
-
   return (
       <Slider slides={['./images/you_are_awesome.jpeg', 'https://yourCDNLink.com', 'home/project/profits/spreadsheet.jpeg']} />
   );
