@@ -1,32 +1,33 @@
 version: 2.1
-orbs:
-  node: circleci/node@1.1.6
-jobs:
-  test:
-    <<: *defaults  
+executors:
+  node-executor:
+    docker:
+      - image: circleci/node:10
+commands:
+  npm-test:
     steps:
       - checkout
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-	  # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
-      - run: npm install
+            - npm-cache-{{ checksum "package-lock.json" }}
       - run:
-          name: Run tests
-          command: npm test
-
+          name: Install Dependencies
+          command: npm install
+      - run:
+          name: test
+          command: npm run test
       - save_cache:
+          key: npm-cache-{{ checksum "package-lock.json" }}
           paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-
+            - ./node_modules
+jobs:
+  test:
+    steps:
+      - npm_test
       - persist_to_workspace:
-          root: ~/repo
-          paths: .
+        root: ~/repo
+        paths: .
   deploy:
-    <<: *defaults
     steps:
       - attach_workspace:
           at: ~/repo
@@ -36,7 +37,7 @@ jobs:
       - run:
           name: Publish package
           command: npm publish
-            
+
 workflows:
   version: 2
   test-deploy:
