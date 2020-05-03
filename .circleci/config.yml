@@ -4,8 +4,8 @@ executors:
     working_directory: ~/repo
     docker:
       - image: circleci/node:10
-commands:
-  npm-test:
+jobs:
+  install_dependency:
     steps:
       - checkout
       - restore_cache:
@@ -14,9 +14,6 @@ commands:
       - run:
           name: Install Dependencies
           command: npm install
-      - run:
-          name: Run tests
-          command: npm test
       - save_cache:
           key: npm-cache-{{ checksum "package-lock.json" }}
           paths:
@@ -24,27 +21,24 @@ commands:
       - persist_to_workspace:
           root: ~/repo
           paths: .
-jobs:
-  test:
-    executor: node-executor
-    steps:
-      - npm-test
   build:
     executor: node-executor
     steps:
-      - attach_workspace:
-          at: ~/repo
       - run:
-          name: build
-          command: npm run build
+        name: build
+        command: npm run build
       - persist_to_workspace:
-          root: ~/repo
-          paths: .
+        root: ~/repo
+        paths: .
+  npm_test:
+    executor: node-executor
+    steps:
+      - run:
+        name: Run tests
+        command: npm test
   deploy:
     executor: node-executor
     steps:
-      - attach_workspace:
-          at: ~/repo
       - run:
           name: Authenticate with registry
           command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ~/repo/.npmrc
@@ -54,17 +48,22 @@ jobs:
 
 workflows:
   version: 2
-  test-deploy:
+  build-test-and-deploy:
     jobs:
-      - test:
+      -install_dependency
+      - build:
+        requires:
+          - install_dependency
+      - npm_test:
+        requires:
+          - install_dependency
           filters:
             tags:
               only: /^v.*/
-      - build
       - deploy:
           requires:
             - build
-            - test
+            - npm_test
           filters:
             tags:
               only: /^v.*/
