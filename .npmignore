@@ -1,6 +1,8 @@
 src/**/*.ts
 src/**/*.tsx
 !src/**/*.d.ts
+
+index.ts
 tsconfig.json
 node_modules
 

@@ -1,19 +1,18 @@
 {
   "compilerOptions": {
-    "strict": true,
     "baseUrl": "src",
+    "strict": true,
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "isolatedModules": true,
     "lib": ["ESNext"],
     "moduleResolution": "node",
-    "noEmit": true,
     "target": "esnext",
     "module": "commonjs",
     "sourceMap": true,
     "declaration": true,
-    "jsx": "react"
+    "jsx": "react-native"
   },
   "include": ["src/**/*", "index.ts"],
   "exclude": ["node_modules"]
