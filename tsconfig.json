@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "baseUrl": "src",
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "lib": ["ESNext"],
+    "moduleResolution": "node",
+    "noEmit": true,
+    "target": "esnext",
+    "module": "commonjs",
+    "sourceMap": true,
+    "declaration": true,
+    "jsx": "react"
+  },
+  "include": ["src/**/*", "index.ts"],
+  "exclude": ["node_modules"]
+}

@@ -1,0 +1,10 @@
+src/**/*.js
+src/**/*.js.map
+src/**/*.d.ts
+
+node_modules
+npm-debug.log
+.env
+.npm
+
+.vscode-test
