@@ -6,6 +6,7 @@ executors:
       - image: circleci/node:10
 jobs:
   install_dependency:
+    executor: node-executor
     steps:
       - checkout
       - restore_cache:
