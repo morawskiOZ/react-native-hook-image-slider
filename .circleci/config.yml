@@ -11,9 +11,9 @@ commands:
           root: ~/repo
           paths: .
   read_files:
-      steps:
-        - attach_workspace:	
-            at: ~/repo
+    steps:
+      - attach_workspace:	
+          at: ~/repo
 jobs:
   install_dependency:
     executor: node-executor
