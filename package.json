@@ -10,16 +10,25 @@
     "test": "true"
   },
   "keywords": [
+    "IOS",
+    "Android",
     "React",
     "Native",
+    "RN",
     "Image",
     "Slider",
     "Hook",
     "Hooks",
     "Gallery"
   ],
-  "author": "Piotr Morawski",
+  "author": {
+    "name": "Piotr Morawski",
+    "email": "piotrmorawski90@gmail.com",
+    "url": "https://morawski.online"
+  },
   "license": "MIT",
+  "repository": "https://github.com/morawskiOZ/react-native-hook-image-slider.git",
+  "homepage": "https://github.com/morawskiOZ/react-native-hook-image-slider",
   "dependencies": {
     "react-native": "*",
     "react": "*"
