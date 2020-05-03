@@ -25,17 +25,17 @@ jobs:
     executor: node-executor
     steps:
       - run:
-        name: build
-        command: npm run build
+          name: build
+          command: npm run build
       - persist_to_workspace:
-        root: ~/repo
-        paths: .
+          root: ~/repo
+          paths: .
   npm_test:
     executor: node-executor
     steps:
       - run:
-        name: Run tests
-        command: npm test
+          name: Run tests
+          command: npm test
   deploy:
     executor: node-executor
     steps:
@@ -57,9 +57,6 @@ workflows:
       - npm_test:
           requires:
             - install_dependency
-          filters:
-            tags:
-              only: /^v.*/
       - deploy:
           requires:
             - build
