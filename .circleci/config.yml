@@ -12,7 +12,7 @@ commands:
           paths: .
   read_files:
     steps:
-      - attach_workspace:	
+      - attach_workspace:
           at: ~/repo
 jobs:
   install_dependency:
