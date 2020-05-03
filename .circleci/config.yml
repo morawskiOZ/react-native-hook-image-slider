@@ -22,8 +22,8 @@ commands:
           paths:
             - ./node_modules
       - persist_to_workspace:
-        root: ~/repo
-        paths: .
+          root: ~/repo
+          paths: .
 jobs:
   test:
     executor: node-executor
