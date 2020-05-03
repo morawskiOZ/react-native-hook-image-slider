@@ -4,13 +4,13 @@ import Content from "./Content"
 import Pagination from "./Pagination"
 
 interface Props {
-	slides: string[]
+	images: string[]
 	imageHeight?: number
 	loadingIndicatorColour?: string
 }
 
 export const Slider = ({
-	slides,
+	images,
 	imageHeight = 300,
 	loadingIndicatorColour = "#000",
 }: Props) => {
@@ -19,12 +19,12 @@ export const Slider = ({
 	return (
 		<View style={styles(imageHeight).container}>
 			<Content
-				slides={slides}
+				images={images}
 				setActiveIndex={setActiveIndex}
 				imageHeight={imageHeight}
 				loadingIndicatorColour={loadingIndicatorColour}
 			/>
-			<Pagination slides={slides} activeIndex={activeIndex} />
+			<Pagination images={images} activeIndex={activeIndex} />
 		</View>
 	)
 }

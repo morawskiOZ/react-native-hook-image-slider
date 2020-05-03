@@ -1,2 +1,2 @@
 import { Slider } from "./src"
-export { Slider }
+export default  Slider

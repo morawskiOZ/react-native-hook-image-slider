@@ -6,7 +6,7 @@
   "scripts": {
     "prebuild": "npm run clean",
     "build": "tsc -p tsconfig.json",
-    "clean": "rimraf index.js ./src/**/*.js ./src/**/*.js.map ./src/**/*.d.ts",
+    "clean": "rimraf index.js index.d.ts index.js.map ./src/**/*.js ./src/**/*.js.map ./src/**/*.d.ts",
     "test": "true"
   },
   "keywords": [

@@ -8,14 +8,14 @@ interface ViewableItemsChangedProps {
 }
 
 interface Props {
-	slides: string[]
+	images: string[]
 	imageHeight: number
 	loadingIndicatorColour: string
 	setActiveIndex: React.Dispatch<React.SetStateAction<number>>
 }
 
 const Content = React.memo(
-	({ slides, setActiveIndex, imageHeight, loadingIndicatorColour }: Props) => {
+	({ images, setActiveIndex, imageHeight, loadingIndicatorColour }: Props) => {
 		// This is why I use ref https://github.com/facebook/react-native/issues/17408
 		const onViewRef = React.useRef((info: ViewableItemsChangedProps) => {
 			if (info?.viewableItems?.[0]) {
@@ -32,7 +32,7 @@ const Content = React.memo(
 				showsHorizontalScrollIndicator={false}
 				pagingEnabled={true}
 				horizontal={true}
-				data={slides}
+				data={images}
 				keyExtractor={(url) => url}
 				onViewableItemsChanged={onViewRef.current as any}
 				renderItem={({ item: url, index }) => {

@@ -3,14 +3,14 @@ import { StyleSheet, View } from "react-native"
 import Dot from "./Dot"
 
 interface Props {
-	slides: string[]
+	images: string[]
 	activeIndex: number
 }
 
-const Pagination = ({ slides, activeIndex }: Props) => {
+const Pagination = ({ images, activeIndex }: Props) => {
 	return (
 		<View style={styles.wrapper}>
-			{slides.map((slide, i) => (
+			{images.map((slide, i) => (
 				<Dot key={slide} active={activeIndex === i} />
 			))}
 		</View>
