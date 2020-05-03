@@ -22,12 +22,16 @@ commands:
             - ./node_modules
 jobs:
   test:
+    executor: node-executor
+    working_directory: ~/repo
     steps:
       - npm-test
       - persist_to_workspace:
         root: ~/repo
         paths: .
   deploy:
+    executor: node-executor
+    working_directory: ~/repo
     steps:
       - attach_workspace:
           at: ~/repo
