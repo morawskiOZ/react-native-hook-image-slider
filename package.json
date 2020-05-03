@@ -1,6 +1,6 @@
 {
   "name": "react-native-hook-image-slider",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "React Native Image Slider UI component built with react hooks",
   "main": "index.js",
   "scripts": {
