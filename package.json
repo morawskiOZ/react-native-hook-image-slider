@@ -1,11 +1,11 @@
 {
   "name": "react-native-hook-image-slider",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "React Native Image Slider UI component built with react hooks",
   "main": "index.js",
   "scripts": {
     "prebuild": "npm run clean",
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc --build",
     "clean": "rimraf index.js index.d.ts index.js.map ./src/**/*.js ./src/**/*.js.map ./src/**/*.d.ts",
     "test": "true"
   },
