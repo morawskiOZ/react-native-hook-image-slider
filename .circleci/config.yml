@@ -1,6 +1,7 @@
 version: 2.1
 executors:
   node-executor:
+    working_directory: ~/repo
     docker:
       - image: circleci/node:10
 commands:
@@ -23,7 +24,6 @@ commands:
 jobs:
   test:
     executor: node-executor
-    working_directory: ~/repo
     steps:
       - npm-test
   deploy:
