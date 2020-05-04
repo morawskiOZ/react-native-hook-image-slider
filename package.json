@@ -1,15 +1,19 @@
 {
   "name": "react-native-hook-image-slider",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "description": "React Native Image Slider UI component built with react hooks",
   "main": "index.js",
   "scripts": {
     "prebuild": "npm run clean",
     "build": "tsc --build",
-    "clean": "rimraf index.js index.d.ts index.js.map ./src/**/*.js ./src/**/*.js.map ./src/**/*.d.ts",
+    "clean": "rimraf *.js *.d.ts *.js.map ./src/**/*.js ./src/**/*.js.map ./src/**/*.d.ts ./src/*.js ./src/*.js.map ./src/*.d.ts",
     "test": "true"
   },
   "keywords": [
+    "npm-react-slider",
+    "npm-react-images",
+    "npm-react-images-slider",
+    "npm",
     "IOS",
     "Android",
     "React",

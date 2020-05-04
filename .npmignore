@@ -4,6 +4,8 @@ src/**/*.tsx
 
 .circleci
 
+docs
+
 index.ts
 tsconfig.json
 node_modules

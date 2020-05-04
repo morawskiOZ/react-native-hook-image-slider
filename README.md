@@ -2,6 +2,11 @@
 
 Light and bare minimum image slider for React Native. Written in TypeScript with React functional components and hooks.
 
+---
+
+
+![SliderBox](docs/assets/preview.gif)
+
 ## Install
 
 `npm i react-native-hook-image-slider`
@@ -16,7 +21,7 @@ or
 |---|---|---|---|---|
 |**`images`**|`array`| Image source (either a remote URL or a local file resource)|`Yes`|None|
 |**`height`**|`number`| Image height in px |`No`|`300`|
-|**`loadingIndicatorColour`**|`string`| Color of each pagination dot|`No`| '#FFF' (black) |
+|**`loadingIndicatorColour`**|`string`| Color of loading indicator(image placeholder)|`No`| '#FFF' (black) |
 
 ## Quickstart
 
@@ -26,7 +31,7 @@ import Slider from 'react-native-hook-image-slider';
 
 const Component = () => {
   return (
-      <Slider slides={['./images/you_are_awesome.jpeg', 'https://yourCDNLink.com', 'home/project/profits/spreadsheet.jpeg']} />
+      <Slider images={['./images/you_are_awesome.jpeg', 'https://yourCDNLink.com', 'home/project/profits/spreadsheet.jpeg']} />
   );
 }
 ```

@@ -15,7 +15,6 @@ export const Slider = ({
 	loadingIndicatorColour = "#000",
 }: Props) => {
 	const [activeIndex, setActiveIndex] = React.useState(0)
-
 	return (
 		<View style={styles(imageHeight).container}>
 			<Content

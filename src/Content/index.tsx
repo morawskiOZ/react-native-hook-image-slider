@@ -1,6 +1,7 @@
 import * as React from "react"
-import { FlatList, StyleSheet, ViewToken } from "react-native"
+import { FlatList, StyleSheet, ViewToken, Dimensions, ViewabilityConfig } from "react-native"
 import Slide from "../Slide"
+import { MutableRefObject } from "react"
 
 interface ViewableItemsChangedProps {
 	viewableItems: ViewToken[]
@@ -13,10 +14,14 @@ interface Props {
 	loadingIndicatorColour: string
 	setActiveIndex: React.Dispatch<React.SetStateAction<number>>
 }
-
+const { width } = Dimensions.get("window")
 const Content = React.memo(
 	({ images, setActiveIndex, imageHeight, loadingIndicatorColour }: Props) => {
+
 		// This is why I use ref https://github.com/facebook/react-native/issues/17408
+		const onViewConfigRef: MutableRefObject<ViewabilityConfig> = React.useRef({
+			viewAreaCoveragePercentThreshold: 90
+		})
 		const onViewRef = React.useRef((info: ViewableItemsChangedProps) => {
 			if (info?.viewableItems?.[0]) {
 				if (info.viewableItems[0].index === null) {
@@ -34,8 +39,12 @@ const Content = React.memo(
 				horizontal={true}
 				data={images}
 				keyExtractor={(url) => url}
-				onViewableItemsChanged={onViewRef.current as any}
-				renderItem={({ item: url, index }) => {
+				viewabilityConfig={onViewConfigRef.current}
+				onViewableItemsChanged={onViewRef.current}
+				getItemLayout={(data, index) => (
+					{ length: width, offset: width * index, index }
+				)}
+				renderItem={({ item: url }) => {
 					return (
 						<Slide
 							slide={url}
@@ -50,7 +59,9 @@ const Content = React.memo(
 )
 
 const styles = StyleSheet.create({
-	wrapper: {},
+	columnWrapper: {
+		width
+	},
 })
 
 export default Content
