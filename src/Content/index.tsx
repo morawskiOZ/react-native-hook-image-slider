@@ -2,7 +2,7 @@ import * as React from "react"
 import { FlatList, StyleSheet, ViewToken, Dimensions, ViewabilityConfig, View } from "react-native"
 import Slide from "../Slide"
 import { MutableRefObject, useCallback } from "react"
-import {Separator} from "../Separator"
+import { Separator } from "../Separator"
 
 interface ViewableItemsChangedProps {
 	viewableItems: ViewToken[]
@@ -49,11 +49,10 @@ const Content = React.memo(
 				keyExtractor={(url, index) => `${url}-${index}`}
 				viewabilityConfig={onViewConfigRef.current}
 				onViewableItemsChanged={onViewRef.current}
-				snapToInterval={totalItemWidth}
 				decelerationRate="fast"
 				bounces={false}
 				progressViewOffset={50}
-				ItemSeparatorComponent={ Separator.bind(null, {width: separatorWidth})}
+				ItemSeparatorComponent={() => <Separator width={separatorWidth} />}
 				getItemLayout={(data, index) => ({
 					length: totalItemWidth,
 					offset: totalItemWidth * index,
