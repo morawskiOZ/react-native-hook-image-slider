@@ -27,7 +27,7 @@ const Content = React.memo(
 			if (info?.changed?.[0]) {
 				if (info.changed[0].index === null) {
 					setActiveIndex(0)
-				} else if (info.changed[0].isViewable){
+				} else if (info.changed[0].isViewable) {
 					setActiveIndex(info.changed[0].index)
 				}
 			}
@@ -39,7 +39,7 @@ const Content = React.memo(
 				pagingEnabled={true}
 				horizontal={true}
 				data={images}
-				keyExtractor={(url) => url}
+				keyExtractor={(url, index) => `${url}-${index}`}
 				viewabilityConfig={onViewConfigRef.current}
 				onViewableItemsChanged={onViewRef.current}
 				getItemLayout={(data, index) => (
