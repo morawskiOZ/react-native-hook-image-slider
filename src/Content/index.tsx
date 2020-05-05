@@ -1,5 +1,5 @@
 import * as React from "react"
-import { FlatList, StyleSheet, ViewToken, Dimensions, ViewabilityConfig } from "react-native"
+import { FlatList, StyleSheet, ViewToken, Dimensions, ViewabilityConfig, View } from "react-native"
 import Slide from "../Slide"
 import { MutableRefObject } from "react"
 
@@ -14,10 +14,14 @@ interface Props {
 	loadingIndicatorColour: string
 	setActiveIndex: React.Dispatch<React.SetStateAction<number>>
 }
-const { width } = Dimensions.get("window")
+
+const generateSeparator = () => <View style={styles.separator} />
+
 const Content = React.memo(
 	({ images, setActiveIndex, imageHeight, loadingIndicatorColour }: Props) => {
 
+		const { width } = Dimensions.get("window")
+		
 		// This is why I use ref https://github.com/facebook/react-native/issues/17408
 		const onViewConfigRef: MutableRefObject<ViewabilityConfig> = React.useRef({
 			viewAreaCoveragePercentThreshold: 80,
@@ -33,6 +37,9 @@ const Content = React.memo(
 			}
 		})
 
+		const separatorWidth = 50
+		const totalItemWidth = width + separatorWidth;
+
 		return (
 			<FlatList
 				showsHorizontalScrollIndicator={false}
@@ -42,23 +49,30 @@ const Content = React.memo(
 				keyExtractor={(url, index) => `${url}-${index}`}
 				viewabilityConfig={onViewConfigRef.current}
 				onViewableItemsChanged={onViewRef.current}
-				renderItem={({ item: url }) => {
-					return (
-						<Slide
-							slide={url}
-							imageHeight={imageHeight}
-							loadingIndicatorColour={loadingIndicatorColour}
-						/>
-					)
-				}}
+				snapToInterval={totalItemWidth}
+				decelerationRate="fast"
+				bounces={false}
+				ItemSeparatorComponent={generateSeparator}
+				getItemLayout={(data, index) => ({
+					length: totalItemWidth,
+					offset: totalItemWidth * index,
+					index,
+				})}
+				renderItem={({ item, index }) =>
+					<Slide
+						slide={item}
+						imageHeight={imageHeight}
+						loadingIndicatorColour={loadingIndicatorColour}
+					/>
+				}
 			/>
 		)
 	}
 )
 
 const styles = StyleSheet.create({
-	columnWrapper: {
-		width
+	separator: {
+		width: 50
 	},
 })
 
