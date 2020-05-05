@@ -2,6 +2,7 @@ import * as React from "react"
 import { FlatList, StyleSheet, ViewToken, Dimensions, ViewabilityConfig, View } from "react-native"
 import Slide from "../Slide"
 import { MutableRefObject, useCallback } from "react"
+import {Separator} from "../Separator"
 
 interface ViewableItemsChangedProps {
 	viewableItems: ViewToken[]
@@ -19,10 +20,6 @@ interface Props {
 const Content = React.memo(
 	({ images, setActiveIndex, imageHeight, loadingIndicatorColour }: Props) => {
 
-		const generateSeparator = useCallback(
-			() => <View style={styles.separator} />,
-			[],
-		)
 		const { width } = Dimensions.get("window")
 
 		// This is why I use ref https://github.com/facebook/react-native/issues/17408
@@ -40,7 +37,7 @@ const Content = React.memo(
 			}
 		})
 
-		const separatorWidth = 50
+		const separatorWidth = 10
 		const totalItemWidth = width + separatorWidth;
 
 		return (
@@ -55,7 +52,8 @@ const Content = React.memo(
 				snapToInterval={totalItemWidth}
 				decelerationRate="fast"
 				bounces={false}
-				ItemSeparatorComponent={generateSeparator}
+				progressViewOffset={50}
+				ItemSeparatorComponent={ Separator.bind(null, {width: separatorWidth})}
 				getItemLayout={(data, index) => ({
 					length: totalItemWidth,
 					offset: totalItemWidth * index,
@@ -73,10 +71,6 @@ const Content = React.memo(
 	}
 )
 
-const styles = StyleSheet.create({
-	separator: {
-		width: 50
-	},
-})
+const styles = StyleSheet.create({})
 
 export default Content
