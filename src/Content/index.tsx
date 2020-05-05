@@ -42,9 +42,6 @@ const Content = React.memo(
 				keyExtractor={(url, index) => `${url}-${index}`}
 				viewabilityConfig={onViewConfigRef.current}
 				onViewableItemsChanged={onViewRef.current}
-				getItemLayout={(data, index) => (
-					{ length: width, offset: width * index, index }
-				)}
 				renderItem={({ item: url }) => {
 					return (
 						<Slide
