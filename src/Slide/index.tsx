@@ -26,11 +26,11 @@ const Slide = ({ slide, imageHeight, loadingIndicatorColour }: Props) => {
 			<Image
 				resizeMode='cover'
 				source={{ uri: slide }}
-				style={styles(imageHeight).image}
+				style={styles(imageHeight, width).image}
 				onLoad={handleLoad}
 			/>
 			{isLoading && (
-				<View style={styles(imageHeight).container}>
+				<View style={styles(imageHeight, width).container}>
 					<ActivityIndicator size='large' color={loadingIndicatorColour} />
 				</View>
 			)}
@@ -38,17 +38,17 @@ const Slide = ({ slide, imageHeight, loadingIndicatorColour }: Props) => {
 	)
 }
 
-const styles = (imageHeight: number) =>
+const styles = (imageHeight: number, width: number) =>
 	StyleSheet.create({
 		image: {
 			overflow: "hidden",
 			resizeMode: "cover",
 			height: imageHeight,
-			width: "100%",
+			width
 		},
 		container: {
 			backgroundColor: "#D3D3D3",
-			width: "100%",
+			width,
 			height: imageHeight,
 			flex: 1,
 			justifyContent: "center",
