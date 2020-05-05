@@ -20,7 +20,7 @@ const Content = React.memo(
 
 		// This is why I use ref https://github.com/facebook/react-native/issues/17408
 		const onViewConfigRef: MutableRefObject<ViewabilityConfig> = React.useRef({
-			viewAreaCoveragePercentThreshold: 90
+			viewAreaCoveragePercentThreshold: 80
 		})
 		const onViewRef = React.useRef((info: ViewableItemsChangedProps) => {
 			if (info?.viewableItems?.[0]) {
