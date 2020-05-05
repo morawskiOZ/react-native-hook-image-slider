@@ -20,14 +20,15 @@ const Content = React.memo(
 
 		// This is why I use ref https://github.com/facebook/react-native/issues/17408
 		const onViewConfigRef: MutableRefObject<ViewabilityConfig> = React.useRef({
-			viewAreaCoveragePercentThreshold: 80
+			viewAreaCoveragePercentThreshold: 80,
+			waitForInteraction: false
 		})
 		const onViewRef = React.useRef((info: ViewableItemsChangedProps) => {
-			if (info?.viewableItems?.[0]) {
-				if (info.viewableItems[0].index === null) {
+			if (info?.changed?.[0]) {
+				if (info.changed[0].index === null) {
 					setActiveIndex(0)
-				} else {
-					setActiveIndex(info.viewableItems[0].index)
+				} else if (info.changed[0].isViewable){
+					setActiveIndex(info.changed[0].index)
 				}
 			}
 		})
