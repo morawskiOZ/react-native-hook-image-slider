@@ -1,7 +1,7 @@
 import * as React from "react"
 import { FlatList, StyleSheet, ViewToken, Dimensions, ViewabilityConfig, View } from "react-native"
 import Slide from "../Slide"
-import { MutableRefObject } from "react"
+import { MutableRefObject, useCallback } from "react"
 
 interface ViewableItemsChangedProps {
 	viewableItems: ViewToken[]
@@ -15,13 +15,16 @@ interface Props {
 	setActiveIndex: React.Dispatch<React.SetStateAction<number>>
 }
 
-const generateSeparator = () => <View style={styles.separator} />
 
 const Content = React.memo(
 	({ images, setActiveIndex, imageHeight, loadingIndicatorColour }: Props) => {
 
+		const generateSeparator = useCallback(
+			() => <View style={styles.separator} />,
+			[],
+		)
 		const { width } = Dimensions.get("window")
-		
+
 		// This is why I use ref https://github.com/facebook/react-native/issues/17408
 		const onViewConfigRef: MutableRefObject<ViewabilityConfig> = React.useRef({
 			viewAreaCoveragePercentThreshold: 80,
