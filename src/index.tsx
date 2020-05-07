@@ -17,7 +17,7 @@ export const Slider = ({
 	images,
 	imageHeight = 300,
 	loadingIndicatorColour = "#000",
-	separatorWidth =  10,
+	separatorWidth =  0,
 	separatorColor = "#FFF",
 	activeDotColor= "#000",
 	emptyDotColor="#FFF"
