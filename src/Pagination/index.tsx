@@ -5,13 +5,15 @@ import Dot from "./Dot"
 interface Props {
 	images: string[]
 	activeIndex: number
+	emptyDotColor: string
+	activeDotColor: string
 }
 
-const Pagination = ({ images, activeIndex }: Props) => {
+const Pagination = ({ images, activeIndex, activeDotColor, emptyDotColor }: Props) => {
 	return (
 		<View style={styles.wrapper}>
 			{images.map((slide, i) => (
-				<Dot key={slide} active={activeIndex === i} />
+				<Dot key={slide} active={activeIndex === i} activeDotColor={activeDotColor} emptyDotColor={emptyDotColor} />
 			))}
 		</View>
 	)

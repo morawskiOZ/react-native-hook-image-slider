@@ -7,12 +7,22 @@ interface Props {
 	images: string[]
 	imageHeight?: number
 	loadingIndicatorColour?: string
+	separatorWidth?: number
+	separatorColor?: string
+	activeDotColor?: string
+	emptyDotColor?: string
 }
 
 export const Slider = ({
 	images,
 	imageHeight = 300,
 	loadingIndicatorColour = "#000",
+	separatorWidth =  10,
+	separatorColor = "#FFF",
+	activeDotColor= "#000",
+	emptyDotColor="#FFF"
+	
+
 }: Props) => {
 	const [activeIndex, setActiveIndex] = React.useState(0)
 	return (
@@ -21,9 +31,11 @@ export const Slider = ({
 				images={images}
 				setActiveIndex={setActiveIndex}
 				imageHeight={imageHeight}
-				loadingIndicatorColour={loadingIndicatorColour}
+				loadingIndicatorColor={loadingIndicatorColour}
+				separatorColor={separatorColor}
+				separatorWidth={separatorWidth}
 			/>
-			<Pagination images={images} activeIndex={activeIndex} />
+			<Pagination images={images} activeIndex={activeIndex} activeDotColor={activeDotColor} emptyDotColor={emptyDotColor}/>
 		</View>
 	)
 }

@@ -1,56 +1,56 @@
 import * as React from "react"
-import { useState } from "react"
-import {
-	ActivityIndicator,
-	Dimensions,
-	StyleSheet,
-	View,
-	Image,
-} from "react-native"
+import { useCallback, useState } from "react"
+import { ActivityIndicator, Dimensions, Image, StyleSheet, View } from "react-native"
 
 interface Props {
-	slide: any
-	imageHeight: number
-	loadingIndicatorColour: string
+	slide: string
+	loadingIndicatorColor: string
+	totalItemWidth: number
+	separatorColor: string
 }
 
 // TODO add image placeholder (pixelated image)
-const Slide = ({ slide, imageHeight, loadingIndicatorColour }: Props) => {
+const Slide = ({ slide, loadingIndicatorColor, totalItemWidth, separatorColor }: Props) => {
 	const { width } = Dimensions.get("window")
 	const [isLoading, setIsLoading] = useState(true)
 
-	const handleLoad = () => setIsLoading(false)
+	const handleLoad = useCallback(() => setIsLoading(false), [])
 
 	return (
-		<View style={{ width }}>
+		<View style={styles(separatorColor, totalItemWidth, width).wrapper}>
 			<Image
 				resizeMode='cover'
 				source={{ uri: slide }}
-				style={styles(imageHeight, width).image}
+				style={styles(separatorColor, totalItemWidth, width).image}
 				onLoad={handleLoad}
 			/>
 			{isLoading && (
-				<View style={styles(imageHeight, width).container}>
-					<ActivityIndicator size='large' color={loadingIndicatorColour} />
+				<View style={styles(separatorColor, totalItemWidth, width).indicatorContainer}>
+					<ActivityIndicator size='large' color={loadingIndicatorColor} />
 				</View>
 			)}
 		</View>
 	)
 }
 
-const styles = (imageHeight: number, width: number) =>
+const styles = (separatorColor: string, totalItemWidth: number, width: number) =>
 	StyleSheet.create({
+		wrapper: {
+			width: totalItemWidth,
+			height: 'auto',
+			backgroundColor: separatorColor
+		},
 		image: {
 			overflow: "hidden",
 			resizeMode: "cover",
-			height: imageHeight,
-			width
+			height: '100%',
+			width: width,
 		},
-		container: {
+		indicatorContainer: {
 			backgroundColor: "#D3D3D3",
 			width,
-			height: imageHeight,
-			flex: 1,
+			height: "100%",
+			position: 'absolute',
 			justifyContent: "center",
 			alignItems: 'center',
 		},

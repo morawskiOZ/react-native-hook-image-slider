@@ -64,12 +64,16 @@ workflows:
           filters:
             tags:
               only: /^v.*/
+            branches:
+              ignore: /.*/
       - build:
           requires:
             - install_dependency
           filters:
             tags:
               only: /^v.*/
+            branches:
+              ignore: /.*/
       - npm_test:
           requires:
             - install_dependency

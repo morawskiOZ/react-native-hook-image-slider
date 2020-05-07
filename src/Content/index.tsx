@@ -1,8 +1,7 @@
 import * as React from "react"
-import { FlatList, StyleSheet, ViewToken, Dimensions, ViewabilityConfig, View } from "react-native"
+import { MutableRefObject } from "react"
+import { Dimensions, FlatList, ViewabilityConfig, ViewToken } from "react-native"
 import Slide from "../Slide"
-import { MutableRefObject, useCallback } from "react"
-import { Separator } from "../Separator"
 
 interface ViewableItemsChangedProps {
 	viewableItems: ViewToken[]
@@ -12,19 +11,20 @@ interface ViewableItemsChangedProps {
 interface Props {
 	images: string[]
 	imageHeight: number
-	loadingIndicatorColour: string
+	loadingIndicatorColor: string
+	separatorWidth: number
+	separatorColor: string
 	setActiveIndex: React.Dispatch<React.SetStateAction<number>>
 }
 
-
 const Content = React.memo(
-	({ images, setActiveIndex, imageHeight, loadingIndicatorColour }: Props) => {
+	({ images, setActiveIndex, imageHeight, loadingIndicatorColor, separatorColor, separatorWidth }: Props) => {
 
 		const { width } = Dimensions.get("window")
 
 		// This is why I use ref https://github.com/facebook/react-native/issues/17408
 		const onViewConfigRef: MutableRefObject<ViewabilityConfig> = React.useRef({
-			viewAreaCoveragePercentThreshold: 80,
+			viewAreaCoveragePercentThreshold: 60,
 			waitForInteraction: false
 		})
 		const onViewRef = React.useRef((info: ViewableItemsChangedProps) => {
@@ -37,39 +37,35 @@ const Content = React.memo(
 			}
 		})
 
-		const separatorWidth = 10
 		const totalItemWidth = width + separatorWidth;
-
 		return (
 			<FlatList
+				style={{ width: totalItemWidth, height: "100%" }}
 				showsHorizontalScrollIndicator={false}
-				pagingEnabled={true}
-				horizontal={true}
+				horizontal
 				data={images}
 				keyExtractor={(url, index) => `${url}-${index}`}
 				viewabilityConfig={onViewConfigRef.current}
 				onViewableItemsChanged={onViewRef.current}
 				decelerationRate="fast"
 				bounces={false}
-				progressViewOffset={50}
-				ItemSeparatorComponent={() => <Separator width={separatorWidth} />}
+				pagingEnabled
 				getItemLayout={(data, index) => ({
-					length: totalItemWidth,
+					length: width,
 					offset: totalItemWidth * index,
 					index,
 				})}
-				renderItem={({ item, index }) =>
+				renderItem={({ item }) =>
 					<Slide
+						totalItemWidth={totalItemWidth}
+						separatorColor={separatorColor}
 						slide={item}
-						imageHeight={imageHeight}
-						loadingIndicatorColour={loadingIndicatorColour}
+						loadingIndicatorColor={loadingIndicatorColor}
 					/>
 				}
 			/>
 		)
 	}
 )
-
-const styles = StyleSheet.create({})
 
 export default Content
